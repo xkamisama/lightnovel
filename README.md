@@ -1,0 +1,2 @@
+# lightnovel
+基于SpringBoot的在线轻小说阅读WebApp
