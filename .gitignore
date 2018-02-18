@@ -1,3 +1,6 @@
+### Secret ###
+application-secret.yml
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
