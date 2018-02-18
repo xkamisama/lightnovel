@@ -1,6 +1,3 @@
-### Secret ###
-*secret.yml
-
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -25,3 +22,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### Secret ###
+*secret.yml
