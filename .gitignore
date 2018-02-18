@@ -24,4 +24,4 @@ nbdist/
 .nb-gradle/
 
 ### Secret ###
-*secret.yml
+application-secret.yml
