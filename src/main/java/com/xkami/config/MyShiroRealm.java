@@ -2,9 +2,9 @@ package com.xkami.config;
 
 
 
-import com.xkami.model.SysPermission;
-import com.xkami.model.SysRole;
-import com.xkami.model.UserInfo;
+import com.xkami.model.Permission;
+import com.xkami.model.Role;
+import com.xkami.model.User;
 import com.xkami.service.UserInfoService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -25,10 +25,10 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        UserInfo userInfo  = (UserInfo)principals.getPrimaryPrincipal();
-        for(SysRole role:userInfo.getRoleList()){
+        User user = (User)principals.getPrimaryPrincipal();
+        for(Role role: user.getRoleList()){
             authorizationInfo.addRole(role.getRole());
-            for(SysPermission p:role.getPermissions()){
+            for(Permission p:role.getPermissions()){
                 authorizationInfo.addStringPermission(p.getPermission());
             }
         }
@@ -45,15 +45,15 @@ public class MyShiroRealm extends AuthorizingRealm {
         System.out.println(token.getCredentials());
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-        UserInfo userInfo = userInfoService.findByUsername(username);
-        System.out.println("----->>userInfo="+userInfo);
-        if(userInfo == null){
+        User user = userInfoService.findByUsername(username);
+        System.out.println("----->>user="+ user);
+        if(user == null){
             return null;
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                userInfo, //用户名
-                userInfo.getPassword(), //密码
-                ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
+                user, //用户名
+                user.getPassword(), //密码
+                ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
                 getName()  //realm name
         );
         return authenticationInfo;

@@ -1,9 +1,9 @@
 package com.xkami.service;
 
 
-import com.xkami.model.UserInfo;
+import com.xkami.model.User;
 
 public interface UserInfoService {
     /**通过username查找用户信息;*/
-     UserInfo findByUsername(String username);
+     User findByUsername(String username);
 }

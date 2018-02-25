@@ -1,11 +1,14 @@
 package com.xkami.web;
 
+
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+
+
 import java.util.Map;
 
 @Controller
@@ -48,5 +51,8 @@ public class HomeController {
         System.out.println("------没有权限-------");
         return "403";
     }
+    @RequestMapping("/test")
+    public void Epub() {
 
+    }
 }

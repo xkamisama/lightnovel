@@ -4,7 +4,7 @@
     profiles:
       active: secret
     datasource:
-      url: jdbc:mysql://localhost:3306/test
+      url: jdbc:mysql://localhost:3306/lightnovel
       username: root
       password: root
       #schema: database/import.sql
@@ -25,3 +25,6 @@
     thymeleaf:
        cache: false
        mode: LEGACYHTML5
+
+ book:
+    filePath: D://novel//

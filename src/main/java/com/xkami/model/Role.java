@@ -1,10 +1,11 @@
 package com.xkami.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class SysRole {
+public class Role implements Serializable{
     @Id@GeneratedValue
     private Integer id; // 编号
     private String role; // 角色标识程序中判断使用,如"admin",这个是唯一的:
@@ -13,13 +14,13 @@ public class SysRole {
 
     //角色 -- 权限关系：多对多关系;
     @ManyToMany(fetch= FetchType.EAGER)
-    @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="roleId")},inverseJoinColumns={@JoinColumn(name="permissionId")})
-    private List<SysPermission> permissions;
+    @JoinTable(name="RolePermission",joinColumns={@JoinColumn(name="roleId")},inverseJoinColumns={@JoinColumn(name="permissionId")})
+    private List<Permission> permissions;
 
     // 用户 - 角色关系定义;
     @ManyToMany
-    @JoinTable(name="SysUserRole",joinColumns={@JoinColumn(name="roleId")},inverseJoinColumns={@JoinColumn(name="uid")})
-    private List<UserInfo> userInfos;// 一个角色对应多个用户
+    @JoinTable(name="UserRole",joinColumns={@JoinColumn(name="roleId")},inverseJoinColumns={@JoinColumn(name="userId")})
+    private List<User> users;// 一个角色对应多个用户
 
     public Integer getId() {
         return id;
@@ -53,19 +54,19 @@ public class SysRole {
         this.available = available;
     }
 
-    public List<SysPermission> getPermissions() {
+    public List<Permission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<SysPermission> permissions) {
+    public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
     }
 
-    public List<UserInfo> getUserInfos() {
-        return userInfos;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUserInfos(List<UserInfo> userInfos) {
-        this.userInfos = userInfos;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
