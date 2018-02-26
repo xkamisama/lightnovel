@@ -23,7 +23,9 @@ public class Book {
     @ManyToMany(fetch= FetchType.EAGER)
     @JoinTable(name="BookTag",joinColumns={@JoinColumn(name="bookId")},inverseJoinColumns={@JoinColumn(name="tagId")})
     private List<Tag> tagList;//小说标签列表
-
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bookId")
+    private List<Chapter> chapterList;//章节列表
     public Integer getId() {
         return id;
     }
