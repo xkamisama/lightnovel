@@ -11,7 +11,7 @@ public class Comment {
     @JoinColumn(name = "chapterId")
     private Chapter chapter;//评论的章节
     private String content;//评论的内容
-
+    private byte state;//评论的状态--0，正常，1，删除
     public Integer getId() {
         return id;
     }

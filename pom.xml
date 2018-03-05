@@ -27,7 +27,6 @@
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/eu.freme-project/epublib-core -->
 
-
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
@@ -97,6 +96,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+					<addResources>true</addResources><!--支持静态文件热部署-->
 				</configuration>
 			</plugin>
 		</plugins>

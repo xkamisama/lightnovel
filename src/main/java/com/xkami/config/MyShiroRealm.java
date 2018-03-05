@@ -2,10 +2,8 @@ package com.xkami.config;
 
 
 
-import com.xkami.model.Permission;
-import com.xkami.model.Role;
 import com.xkami.model.User;
-import com.xkami.service.UserInfoService;
+import com.xkami.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -20,18 +18,13 @@ import javax.annotation.Resource;
 
 public class MyShiroRealm extends AuthorizingRealm {
     @Resource
-    private UserInfoService userInfoService;
+    private UserService userService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         User user = (User)principals.getPrimaryPrincipal();
-        for(Role role: user.getRoleList()){
-            authorizationInfo.addRole(role.getRole());
-            for(Permission p:role.getPermissions()){
-                authorizationInfo.addStringPermission(p.getPermission());
-            }
-        }
+        authorizationInfo.addRole(user.getRole());
         return authorizationInfo;
     }
 
@@ -45,7 +38,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         System.out.println(token.getCredentials());
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-        User user = userInfoService.findByUsername(username);
+        User user = userService.findByUsername(username);
         System.out.println("----->>user="+ user);
         if(user == null){
             return null;
