@@ -1,14 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>register2w22222222</title>
+    <title>register</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
+    <script src="../static/js/jquery-3.3.1.min.js" ></script>
+    <script src="../static/js/bootstrap.min.js" ></script>
 </head>
 <body>
-<form action="/register/add" method="post">
-    <input type="text" name="username"/>
-    <input type="password" name="password">
-    <input type="submit" >
-</form>
+<div class="container" >
+    <form action="/register/add" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="username">Username</label> <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</span>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label> <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</span>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label> <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
 </body>
 </html>

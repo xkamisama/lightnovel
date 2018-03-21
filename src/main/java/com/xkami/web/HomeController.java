@@ -3,6 +3,7 @@ package com.xkami.web;
 
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -55,4 +56,18 @@ public class HomeController {
     public void Epub() {
 
     }
+    @RequestMapping("/top")
+    public String top(){
+        return "top";
+    }
+    @RequestMapping("/menu")
+    public String menu(){
+        return "menu";
+    }
+    @RequestMapping("/manage")
+    @RequiresRoles("管理员")
+    public String manage(){
+        return "manage";
+    }
+
 }

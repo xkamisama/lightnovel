@@ -6,17 +6,18 @@ import javax.persistence.*;
 public class Comment {
     @Id
     @GeneratedValue
-    private Integer id;//评论id
+    private Long id;//评论id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chapterId")
     private Chapter chapter;//评论的章节
     private String content;//评论的内容
+    @Column(columnDefinition = "0")
     private byte state;//评论的状态--0，正常，1，删除
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

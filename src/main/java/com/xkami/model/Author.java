@@ -1,19 +1,26 @@
 package com.xkami.model;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.omg.CORBA.DefinitionKind;
+
 import javax.persistence.*;
 
 @Entity
 public class Author {
     @Id
     @GeneratedValue
-    private Integer id;//作者id
+    private Long id;//作者id
     @OneToOne(fetch = FetchType.LAZY)
     private User user;//作者账户
     @Column(unique = true)
+    @NotEmpty(message = "姓名不能为空")
     private String name;//作者笔名
     private Boolean sex;//性别 0：女 1：男
-    private String email;//邮箱
+    @NotEmpty(message = "个人简介不能为空")
     private String introduction;//个人简介
+    @Column(columnDefinition = "0")
+    private byte state;
 
     public User getUser() {
         return user;
@@ -31,13 +38,6 @@ public class Author {
         this.sex = sex;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getIntroduction() {
         return introduction;
@@ -47,11 +47,11 @@ public class Author {
         this.introduction = introduction;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

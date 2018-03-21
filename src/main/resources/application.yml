@@ -2,6 +2,16 @@
 #    devtools:
 #      restart:
 #        additional-paths: src
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/,file:D:/novel/
+    http:
+      multipart:
+        enabled: true
+        file-size-threshold: 0
+        max-file-size: 4Mb
+        max-request-size: 10Mb
+    mvc:
+      static-path-pattern:  /static/**
     session:
       store-type: redis
     profiles:

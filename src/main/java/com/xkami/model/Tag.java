@@ -8,10 +8,10 @@ import java.util.List;
 public class Tag implements Serializable {
     @Id
     @GeneratedValue
-    private Integer id;//小说标签的id
+    private Long id;//小说标签的id
     @Column(unique = true)
     private String description;//标签的描述
-    private Boolean avaliable;//标签是否可用
+    private boolean avaliable;//标签是否可用
     @ManyToMany(fetch= FetchType.LAZY)
     @JoinTable(name="BookTag",joinColumns={@JoinColumn(name="tagId")},inverseJoinColumns={@JoinColumn(name="bookId")})
     private List<Book> bookList;
@@ -23,20 +23,20 @@ public class Tag implements Serializable {
         this.description = description;
     }
 
-    public Boolean getAvaliable() {
+    public boolean isAvaliable() {
         return avaliable;
     }
 
-    public void setAvaliable(Boolean avaliable) {
+    public void setAvaliable(boolean avaliable) {
         this.avaliable = avaliable;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
 
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

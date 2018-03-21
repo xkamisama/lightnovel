@@ -1,8 +1,5 @@
 package com.xkami.model;
 
-import com.xkami.model.Book;
-import com.xkami.model.Tag;
-
 import javax.persistence.*;
 
 
@@ -13,7 +10,7 @@ import javax.persistence.*;
 public class BookTag {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private Integer count;//标记次数
     @ManyToOne
     @JoinColumn(name="bookId")
@@ -22,11 +19,11 @@ public class BookTag {
     @JoinColumn(name="tagId")
     private Tag tag;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

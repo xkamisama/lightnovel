@@ -8,7 +8,7 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue
-    private Integer id;//小说id
+    private Long id;//小说id
     @Column(unique = true)
     private String title;//小说标题
     @ManyToOne
@@ -17,20 +17,68 @@ public class Book {
     @ManyToOne
     @JoinColumn(name="authorId")
     private Author author;//小说作者
-    private String uri;//小说资源唯一标识
     private Date date;//小说录入时间
-    private Boolean available;//小说状态（上下架）
+    @Column(columnDefinition = "0")
+    private byte state;//小说状态（上下架）:0:未审核，1：上架，2下架
     @ManyToMany(fetch= FetchType.EAGER)
     @JoinTable(name="BookTag",joinColumns={@JoinColumn(name="bookId")},inverseJoinColumns={@JoinColumn(name="tagId")})
     private List<Tag> tagList;//小说标签列表
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId")
     private List<Chapter> chapterList;//章节列表
-    public Integer getId() {
+    private String description;//小说简介
+    private String postUrl;//封面路径
+
+    public String getPostUrl() {
+        return postUrl;
+    }
+
+    public void setPostUrl(String postUrl) {
+        this.postUrl = postUrl;
+    }
+
+    public void setState(byte state) {
+        this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", category=" + category +
+                ", author=" + author +
+                ", date=" + date +
+                ", state=" + state +
+                ", tagList=" + tagList +
+                ", chapterList=" + chapterList +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+
+    public List<Chapter> getChapterList() {
+        return chapterList;
+    }
+
+    public void setChapterList(List<Chapter> chapterList) {
+        this.chapterList = chapterList;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,28 +106,12 @@ public class Book {
         this.author = author;
     }
 
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 
     public List<Tag> getTagList() {

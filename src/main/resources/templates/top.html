@@ -1,0 +1,29 @@
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<div class="container" style="">
+    <div class="row" style="height: 80px">
+        <div class="col" >
+            <h2>轻小说之家</h2>
+        </div>
+        <div class="col" >
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col row">
+            <div>欢迎：<shiro:principal property="username" /></div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    menu
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">我的收藏</a>
+                    <a class="dropdown-item" href="/author/registerPage" shiro:hasRole="读者"> 成为作者</a>
+                    <a class="dropdown-item" href="/author/authorHome" shiro:hasRole="作者"> 作者中心</a>
+                    <a class="dropdown-item" href="/logout">退出登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>createBook</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
+    <script src="../static/js/jquery-3.3.1.min.js" ></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/common.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="top"></div>
+    <div id="middle">
+        <form action="/author/createBook" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">小说标题</label>
+                <input type="text" class="form-control" id="title"  placeholder="输入小说标题" name="title">
+            </div>
+            <div class="form-group">
+                <label for="description">小说简介</label>
+                <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">小说分类</label>
+                <select id="category" class="form-control" name="category" >
+                    <th:block th:each="category:${categoryList}">
+                        <option th:value="${category.id}"><div th:text="${category.description}"></div></option>
+                    </th:block>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlFile1">小说封面</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

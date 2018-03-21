@@ -1,5 +1,7 @@
 package com.xkami.config;
 
+
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -24,6 +26,7 @@ public class ShiroConfig {
 		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 		// 配置不会被拦截的链接 顺序判断
 		filterChainDefinitionMap.put("/static/**", "anon");
+		filterChainDefinitionMap.put("/favicon.ico", "anon");
 		//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/register/**","anon");
 		filterChainDefinitionMap.put("/logout", "logout");
@@ -95,5 +98,9 @@ public class ShiroConfig {
 		r.setExceptionAttribute("ex");     // Default is "exception"
 		//r.setWarnLogCategory("example.MvcLogger");     // No default
 		return r;
+	}
+	@Bean(name = "shiroDialect")
+	public ShiroDialect shiroDialect(){
+		return new ShiroDialect();
 	}
 }
