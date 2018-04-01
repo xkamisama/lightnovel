@@ -9,7 +9,7 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">小说审核</li>
+                    <li class="list-group-item" id="bookCheck">小说审核</li>
                     <li class="list-group-item">章节审核</li>
                 </ul>
             </div>
@@ -47,3 +47,10 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#bookCheck").click(function () {
+            $("#main").load("/manage/bookCheckList");
+        })
+    })
+</script>

@@ -1,0 +1,25 @@
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<div id="vue">
+    <ul class="nav nav-tabs">
+        <input type="hidden" th:value="${category.id}" id="category">
+        <th:block th:each="category:${categoryList}">
+            <a class="nav-link" th:id="${category.id}"><th:block th:text="${category.description}"></th:block> </a>
+        </th:block>
+    </ul>
+    <div class="row">
+        <th:block th:each="book:${bookList}">
+            <div class="col-4">
+                <img class="figure-img img-fluid rounded" th:src="${book.postUrl}" style="height: 100%;width: 100%">
+            </div>
+        </th:block>
+    </div>
+</div>
+<script>
+$(document).ready(function () {
+    var categoryId = $("#category").val();
+    $("#"+categoryId).addClass("active");
+})
+</script>
+

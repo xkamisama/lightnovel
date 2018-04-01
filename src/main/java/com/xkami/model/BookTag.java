@@ -1,13 +1,14 @@
 package com.xkami.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 /**
  * 小说标签对应表
  */
 @Entity
-public class BookTag {
+public class BookTag implements Serializable{
     @Id
     @GeneratedValue
     private Long id;

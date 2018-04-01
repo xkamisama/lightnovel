@@ -11,6 +11,7 @@ public class Tag implements Serializable {
     private Long id;//小说标签的id
     @Column(unique = true)
     private String description;//标签的描述
+    @Column(columnDefinition = "bit default 1")
     private boolean avaliable;//标签是否可用
     @ManyToMany(fetch= FetchType.LAZY)
     @JoinTable(name="BookTag",joinColumns={@JoinColumn(name="tagId")},inverseJoinColumns={@JoinColumn(name="bookId")})

@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>index</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
-    <script src="../static/js/jquery-3.3.1.min.js" ></script>
-    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" >
+    <script src="/static/js/jquery-3.3.1.min.js" ></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/vue.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#top").load("/top")
+            $("#top").load("/top");
+            $("#byCategory").load("/read/category/1/0");
         })
     </script>
     <style>
@@ -17,8 +19,14 @@
     </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
     <div id="top"></div>
+    <div id="middle" class="row">
+        <div class="col-9" id="byCategory">
+
+        </div>
+        <div class="col-3">小说排行</div>
+    </div>
 </div>
 </body>
 </html>

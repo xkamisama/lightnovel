@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>作者后台</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
-    <script src="../static/js/jquery-3.3.1.min.js" ></script>
-    <script src="../static/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/js/common.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" >
+    <script src="/static/js/jquery-3.3.1.min.js" ></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/common.js"></script>
 </head>
 <body>
 <div class="container">
     <div id="top"></div>
     <div id="middle" >
         <h3>我的小说</h3>
-        <div id="bookList">
-            <div><a href="/author/createBookPage">创建小说</a></div>
+        <div><a href="/author/createBookPage">创建小说</a></div>
+        <div id="bookList"  class="row">
+            <th:block th:each="book:${bookList}">
+
+                    <div class="col-6 row" style="height: 400px;">
+                        <div class="col-6">
+                            <img class="figure-img img-fluid rounded" th:src="${book.postUrl}" style="height: 100%;width: 100%">
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <h3 th:text="${book.title}"></h3>
+                            </div>
+                            <div>
+                                分类：<span th:text="${book.category.description}"></span>
+                            </div>
+                            <div>
+                                创建时间：<span th:text="${book.date}"></span>
+                            </div>
+                            <div>
+                                <a th:href="@{'/author/authorEditor/'+${book.id}}"><button type="button" class="btn btn-primary" >
+                                    编辑</button></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </th:block>
+
         </div>
     </div>
 

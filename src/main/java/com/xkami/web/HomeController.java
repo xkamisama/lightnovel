@@ -1,19 +1,32 @@
 package com.xkami.web;
 
 
+import com.xkami.model.Message;
+import com.xkami.model.User;
+import com.xkami.service.MessageService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class HomeController {
+    @Resource
+    MessageService messageService;
     @RequestMapping({"/","/index"})
     public String index(){
         return"/index";
@@ -53,11 +66,16 @@ public class HomeController {
         return "403";
     }
     @RequestMapping("/test")
-    public void Epub() {
-
+    public String Epub() {
+        return "test";
     }
     @RequestMapping("/top")
-    public String top(){
+    public String top(Model model){
+
+
+        User user =(User) SecurityUtils.getSubject().getPrincipal();
+
+        model.addAttribute("messageCount",messageService.countAllByUserAndState(user,new Byte("0")));
         return "top";
     }
     @RequestMapping("/menu")
@@ -68,6 +86,26 @@ public class HomeController {
     @RequiresRoles("管理员")
     public String manage(){
         return "manage";
+    }
+    @RequestMapping("/message")
+    public String message(){
+        return "message";
+    }
+    @RequestMapping("/message/{state}/{page}")
+    public String messageList(@PathVariable byte state,@PathVariable int page,Model model){
+        User user =(User) SecurityUtils.getSubject().getPrincipal();
+        Pageable pageable = new PageRequest(page,10);
+        List<Message> messageList=messageService.findAllByUserAndState(user,state,pageable);
+
+        model.addAttribute("messageList",messageList);
+        return "messageList";
+    };
+    @RequestMapping("/message/changeState/{messageId}/{state}")
+    public String changeMessageState(@PathVariable Long messageId,@PathVariable byte state){
+        Message message = messageService.findById(messageId);
+        message.setState(state);
+        messageService.save(message);
+        return "redirect:/message/0/0";
     }
 
 }

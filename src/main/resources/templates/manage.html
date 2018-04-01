@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>后台管理</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
-    <script src="../static/js/jquery-3.3.1.min.js" ></script>
-    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" >
+    <script src="/static/js/jquery-3.3.1.min.js" ></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#menu").load("/menu");
+
         })
     </script>
 </head>
 <body>
 <div class="container">
     <div id="top" class="row justify-content-between">
-        <div><h2>轻小说之家</h2></div>
-        <div>欢迎管理员：</div>
+        <div><a href="/index"><h2>轻小说之家</h2></a></div>
+        <div>欢迎管理员：<shiro:principal property="username" /></div>
     </div>
     <div class="row">
-        <div id="menu" class="col-3" ></div>
-        <div id="main" class="col-9" ></div>
+        <div id="menu" class="col-2" ></div>
+        <div id="main" class="col-10" ></div>
     </div>
 </div>
 </body>

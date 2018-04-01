@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>小说详情</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" >
+    <script src="/static/js/jquery-3.3.1.min.js" ></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/common.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="top"></div>
+    <div id="middle">
+        <div class="row">
+            <div class="col-4" style="height: 300px;width: 200px">
+                <img class="figure-img img-fluid rounded" th:src="${book.postUrl}" style="height: 100%;width: 100%">
+            </div>
+            <div class="col-8">
+                <div>
+                    <h3 th:text="${book.title}"></h3>
+                </div>
+                <div>
+                    作者：<span th:text="${book.author.user.username}"></span>
+                    分类：<span th:text="${book.category.description}"></span>
+                </div>
+                <div class="card">
+                    <p class="card-title">小说描述</p>
+                    <div class="card-body" th:text="${book.description}">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="chapterList">
+            <div><h3>章节列表</h3></div>
+            <div class="row">
+                <th:block th:each="chapter:${book.chapterList}">
+                    <div class="col-3" th:if="${chapter.state}==1" th:text="${chapter.title}">hello</div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

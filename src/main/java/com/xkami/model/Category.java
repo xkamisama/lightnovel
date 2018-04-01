@@ -4,15 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class Category {
+public class Category implements Serializable{
     @Id
     @GeneratedValue
     private Long id;//类别id
     @Column(unique = true)
     private String description;//类别描述
-    @Column(columnDefinition = "1")
+    @Column(columnDefinition = "bit default 1")
     private boolean available;//类别状态
 
     @Override

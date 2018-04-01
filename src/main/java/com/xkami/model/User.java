@@ -11,6 +11,10 @@ public class User implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+    private String headUrl;//头像
+    private byte sex;//性别:0-女，1-男
+    private String introduction;//个人介绍
+
     @Column(unique =true)
     @NotEmpty(message = "用户名不能为空")
     private String username;//帐号
@@ -20,7 +24,7 @@ public class User implements Serializable {
     @Email(message = "不符合邮箱规范")
     private String email;//邮箱
     private String salt;//加密密码的盐
-    @Column(columnDefinition = "0")
+    @Column(columnDefinition = "tinyint default 0")
     private byte state;//用户状态,0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "roleId")

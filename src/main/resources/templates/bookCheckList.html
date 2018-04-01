@@ -1,0 +1,29 @@
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">标题</th>
+            <th scope="col">作者</th>
+            <th scope="col">分类</th>
+            <th scope="col">日期</th>
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book:${bookList}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author.user.username}"></td>
+            <td th:text="${book.category.description}"></td>
+            <td th:text="${book.date}"></td>
+            <td th:onclick="'javascript:check('+${book.id}+')'">查看</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function check(id) {
+        $("#main").load("/manage/bookCheckDetail/"+id);
+    }
+</script>

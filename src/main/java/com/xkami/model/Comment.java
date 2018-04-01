@@ -1,9 +1,10 @@
 package com.xkami.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Comment {
+public class Comment implements Serializable{
     @Id
     @GeneratedValue
     private Long id;//评论id
@@ -11,7 +12,7 @@ public class Comment {
     @JoinColumn(name = "chapterId")
     private Chapter chapter;//评论的章节
     private String content;//评论的内容
-    @Column(columnDefinition = "0")
+    @Column(columnDefinition = "tinyint default 0")
     private byte state;//评论的状态--0，正常，1，删除
     public Long getId() {
         return id;

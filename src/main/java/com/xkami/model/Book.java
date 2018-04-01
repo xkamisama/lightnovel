@@ -1,11 +1,15 @@
 package com.xkami.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Book {
+public class Book implements Serializable{
     @Id
     @GeneratedValue
     private Long id;//小说id
@@ -14,17 +18,20 @@ public class Book {
     @ManyToOne
     @JoinColumn(name="categoryId")
     private Category category;//小说种类
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="authorId")
+    @JsonIgnore
     private Author author;//小说作者
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyyMMddHHmmss")
     private Date date;//小说录入时间
-    @Column(columnDefinition = "0")
-    private byte state;//小说状态（上下架）:0:未审核，1：上架，2下架
+    @Column(columnDefinition = "tinyint default 0")
+    private byte state;//小说状态（上下架）:0:未审核，1：审核通过（上架），2：审核未通过，3：下架
     @ManyToMany(fetch= FetchType.EAGER)
     @JoinTable(name="BookTag",joinColumns={@JoinColumn(name="bookId")},inverseJoinColumns={@JoinColumn(name="tagId")})
     private List<Tag> tagList;//小说标签列表
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId")
+    @JsonIgnore
     private List<Chapter> chapterList;//章节列表
     private String description;//小说简介
     private String postUrl;//封面路径
